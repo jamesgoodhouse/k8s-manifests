@@ -26,11 +26,13 @@ data:
           label: HVAC
           location: Great Room
           thing_id: great_room
+          type_id: ac_unit
         main_bedroom:
           host: main-bedroom.hvac.home.lan
           label: HVAC
           location: Main Bedroom
           thing_id: main_bedroom
+          type_id: ac_unit
       zwave:
         controller:
           port: /dev/ttyUSB0
