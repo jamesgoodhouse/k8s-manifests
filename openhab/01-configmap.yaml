@@ -32,10 +32,14 @@ data:
           port: /dev/ttyUSB0
         sensors:
           front_door:
+            label: Door Sensor
+            location: Entryway
             node_id: 2
             thing_id: front_door_sensor
             type_id: eco_dwzwave25_00_000
           garage_door:
+            label: Tilt Sensor
+            location: Garage
             node_id: 3
             thing_id: garage_tilt_sensor
             type_id: eco_tiltzwave25_00_000
