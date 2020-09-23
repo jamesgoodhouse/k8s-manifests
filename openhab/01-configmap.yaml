@@ -20,7 +20,6 @@ data:
     things:
       airquality:
         station_id: 86
-        # station_id: 110863
       daikin_great_room:
         host: great-room.hvac.home.lan
         thing_id: great_room
