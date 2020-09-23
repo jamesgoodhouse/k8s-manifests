@@ -50,9 +50,10 @@ data:
         region: or
         dayset:
           trash: Friday
-      influxdb:
-        db: openhab
-        url: http://influxdb:8086
+      persistence:
+        influxdb:
+          db: openhab
+          url: http://influxdb:8086
       i18n:
         language: en
         region: US
