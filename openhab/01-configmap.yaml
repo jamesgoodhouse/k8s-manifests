@@ -51,6 +51,7 @@ data:
             type_id: eco_tiltzwave25_00_000
     settings:
       addons:
+        action: telegram
         package: minimal
         binding: airquality,bluetooth,daikin,network,systeminfo,telegram,zwave
         persistence: influxdb
