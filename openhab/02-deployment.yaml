@@ -50,7 +50,7 @@ spec:
 
       containers:
       - name: openhab
-        image: openhab/openhab:2.5.8
+        image: openhab/openhab:2.5.9
         ports:
         - containerPort: 8080
         securityContext:
