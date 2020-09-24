@@ -54,6 +54,7 @@ data:
         package: minimal
         binding: airquality,bluetooth,daikin,network,systeminfo,telegram,zwave
         persistence: influxdb
+        transformation: map
         ui: basic,habmin,paper,restdocs
       ephemeris:
         country: us
