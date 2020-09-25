@@ -9,8 +9,20 @@ spec:
   repo: https://grafana.github.io/helm-charts
   targetNamespace: openhab
   valuesContent: |-
+    image:
+      tag: 7.2.0
     admin:
       existingSecret: grafana-auth
     ingress:
       enabled: true
       hosts: [grafana.openhab.home.lan]
+    persistence:
+      enabled: true
+      storageClassName: local-path
+    sidecar:
+      image:
+        tag: 0.1.209
+      dashboards:
+        enabled: true
+      datasources:
+        enabled: true
