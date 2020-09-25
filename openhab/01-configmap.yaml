@@ -53,7 +53,7 @@ data:
       addons:
         action: telegram
         package: minimal
-        binding: airquality,bluetooth,daikin,network,systeminfo,telegram,zwave
+        binding: airquality,bluetooth,daikin,network,systeminfo,zwave
         persistence: influxdb
         transformation: map
         ui: basic,habmin,paper,restdocs
