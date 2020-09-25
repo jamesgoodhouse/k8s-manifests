@@ -14,6 +14,10 @@ spec:
     env:
     - name: INFLUXDB_DB
       value: openhab
+    config:
+      reporting_disabled: true
+      http:
+        auth-enabled: true
     persistence:
       enabled: true
       storageClass: local-path
