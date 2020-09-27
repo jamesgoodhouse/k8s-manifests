@@ -54,6 +54,7 @@ data:
         action: telegram
         package: minimal
         binding: airquality,bluetooth,daikin,network,systeminfo,zwave
+        misc: ''
         persistence: influxdb
         transformation: map
         ui: basic,habmin,paper,restdocs
