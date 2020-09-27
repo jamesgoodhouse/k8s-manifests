@@ -54,7 +54,7 @@ spec:
 
       containers:
       - name: openhab
-        image: jgoodhouse/openhab:2.5.9
+        image: jgoodhouse/openhab:2.5.9-78406f6
         imagePullPolicy: Always
         securityContext:
           privileged: true # to allow bluetooth and zstick access, might be able to be scoped down some
