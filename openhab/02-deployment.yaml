@@ -16,6 +16,8 @@ spec:
       labels:
         app: openhab
     spec:
+      hostNetwork: true # to allow bluetooth access
+
       volumes:
       - name: openhab-conf
         persistentVolumeClaim:
@@ -50,11 +52,10 @@ spec:
 
       containers:
       - name: openhab
-        image: openhab/openhab:2.5.9
-        ports:
-        - containerPort: 8080
+        image: jgoodhouse/openhab:2.5.9
+        imagePullPolicy: Always
         securityContext:
-          privileged: true
+          privileged: true # to allow bluetooth and zstick access, might be able to be scoped down some
         volumeMounts:
         - name: zstick
           mountPath: /dev/ttyUSB0
