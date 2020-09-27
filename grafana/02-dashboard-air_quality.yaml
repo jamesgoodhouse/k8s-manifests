@@ -23,7 +23,6 @@ data:
       "editable": true,
       "gnetId": null,
       "graphTooltip": 0,
-      "id": 1,
       "links": [],
       "panels": [
         {
@@ -231,6 +230,7 @@ data:
                   "type": "fill"
                 }
               ],
+              "hide": true,
               "measurement": "AQI_Home_Level",
               "orderByTime": "ASC",
               "policy": "default",
@@ -276,6 +276,7 @@ data:
                   "type": "fill"
                 }
               ],
+              "hide": true,
               "measurement": "AQI_Home_Level",
               "orderByTime": "ASC",
               "policy": "default",
@@ -321,6 +322,7 @@ data:
                   "type": "fill"
                 }
               ],
+              "hide": true,
               "measurement": "AQI_Home_Level",
               "orderByTime": "ASC",
               "policy": "default",
@@ -366,6 +368,7 @@ data:
                   "type": "fill"
                 }
               ],
+              "hide": true,
               "measurement": "AQI_Home_Level",
               "orderByTime": "ASC",
               "policy": "default",
@@ -411,6 +414,7 @@ data:
                   "type": "fill"
                 }
               ],
+              "hide": true,
               "measurement": "AQI_Home_Level",
               "orderByTime": "ASC",
               "policy": "default",
@@ -456,6 +460,7 @@ data:
                   "type": "fill"
                 }
               ],
+              "hide": true,
               "measurement": "AQI_Home_Level",
               "orderByTime": "ASC",
               "policy": "default",
@@ -618,5 +623,5 @@ data:
       "timezone": "",
       "title": "Air Quality",
       "uid": "3amlWmWRk",
-      "version": 12
+      "version": 1
     }

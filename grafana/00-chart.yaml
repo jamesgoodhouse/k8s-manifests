@@ -6,11 +6,13 @@ metadata:
   namespace: kube-system
 spec:
   chart: grafana
-  repo: https://grafana.github.io/helm-charts
   targetNamespace: openhab
+  version: 5.6.10
+  repo: https://grafana.github.io/helm-charts
   valuesContent: |-
     image:
       tag: 7.2.0
+    envFromSecret: influxdb-auth
     admin:
       existingSecret: grafana-auth
     ingress:
@@ -21,7 +23,7 @@ spec:
       storageClassName: local-path
     sidecar:
       image:
-        tag: 0.1.209
+        tag: 0.1.209 # most recent with arm support
       dashboards:
         enabled: true
       datasources:
