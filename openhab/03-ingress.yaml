@@ -9,7 +9,7 @@ metadata:
     ingress.kubernetes.io/auth-secret: openhab-basic-auth
 spec:
   rules:
-  - host: openhab.home.lan
+  - host: openhab.home
     http:
       paths:
       - path: /

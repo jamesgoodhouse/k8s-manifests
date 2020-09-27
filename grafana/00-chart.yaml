@@ -17,7 +17,7 @@ spec:
       existingSecret: grafana-auth
     ingress:
       enabled: true
-      hosts: [grafana.openhab.home.lan]
+      hosts: [grafana.home]
     persistence:
       enabled: true
       storageClassName: local-path
