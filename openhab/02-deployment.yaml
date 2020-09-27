@@ -16,7 +16,9 @@ spec:
       labels:
         app: openhab
     spec:
-      hostNetwork: true # to allow bluetooth access
+      # to allow bluetooth access
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
 
       volumes:
       - name: openhab-conf
