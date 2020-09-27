@@ -17,7 +17,9 @@ spec:
       existingSecret: grafana-auth
     ingress:
       enabled: true
-      hosts: [grafana.home]
+      hosts: [grafana.jamgood96.com]
+      annotations:
+        ingress.kubernetes.io/ssl-redirect: 'true'
     persistence:
       enabled: true
       storageClassName: local-path

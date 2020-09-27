@@ -7,9 +7,10 @@ metadata:
   annotations:
     ingress.kubernetes.io/auth-type: basic
     ingress.kubernetes.io/auth-secret: openhab-basic-auth
+    ingress.kubernetes.io/ssl-redirect: 'true'
 spec:
   rules:
-  - host: openhab.home
+  - host: openhab.jamgood96.com
     http:
       paths:
       - path: /
