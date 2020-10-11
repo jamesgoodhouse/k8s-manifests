@@ -1,0 +1,40 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: influxdb
+  namespace: kube-system
+spec:
+  chart: influxdb
+  targetNamespace: data
+  version: 4.8.5
+  repo: https://helm.influxdata.com
+  valuesContent: |-
+    image:
+      tag: 1.8.3
+    config:
+      reporting_disabled: true
+      http:
+        auth-enabled: true
+    persistence:
+      enabled: true
+      storageClass: local-path
+      size: 4Gi
+    envFromSecret: influxdb-auth
+    initScripts:
+      enabled: true
+      scripts:
+        init.iql: |+
+          CREATE DATABASE openhab
+        init.sh: |+
+          #!/bin/bash
+          export INFLUX_PASSWORD="$INFLUXDB_ADMIN_PASSWORD"
+          export INFLUX_USERNAME="$INFLUXDB_ADMIN_USER"
+
+          # setup openhab user
+          influx -execute "CREATE USER $INFLUXDB_OPENHAB_USER WITH PASSWORD '$INFLUXDB_OPENHAB_PASSWORD'"
+          influx -execute "GRANT ALL ON \"openhab\" TO \"$INFLUXDB_OPENHAB_USER\""
+
+          # setup grafana user
+          influx -execute "CREATE USER $INFLUXDB_GRAFANA_USER WITH PASSWORD '$INFLUXDB_GRAFANA_PASSWORD'"
+          influx -execute "GRANT READ ON \"openhab\" TO \"$INFLUXDB_GRAFANA_USER\""

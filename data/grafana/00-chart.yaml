@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
 spec:
   chart: grafana
-  targetNamespace: openhab
+  targetNamespace: data
   version: 5.6.10
   repo: https://grafana.github.io/helm-charts
   valuesContent: |-

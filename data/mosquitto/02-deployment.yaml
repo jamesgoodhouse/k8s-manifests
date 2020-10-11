@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mosquitto-deployment
+  namespace: data
+  labels:
+    app: mosquitto
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mosquitto
+  template:
+    metadata:
+      labels:
+        app: mosquitto
+    spec:
+      volumes:
+      - name: mosquitto-data
+        persistentVolumeClaim:
+          claimName: mosquitto-data-pvc
+      - name: mosquitto-logs
+        persistentVolumeClaim:
+          claimName: mosquitto-logs-pvc
+      - name: conf
+        configMap:
+          name: mosquitto-conf
+
+      containers:
+      - name: mosquitto
+        image: eclipse-mosquitto:1.6.12
+        ports:
+        - containerPort: 1883
+        - containerPort: 8883
+        volumeMounts:
+        - name: mosquitto-data
+          mountPath: /mosquitto/data
+        - name: mosquitto-logs
+          mountPath: /mosquitto/log
+        - name: conf
+          mountPath: /mosquitto/config

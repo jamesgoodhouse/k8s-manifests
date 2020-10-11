@@ -17,8 +17,8 @@ spec:
         app: openhab
     spec:
       # to allow bluetooth access
-      hostNetwork: true
-      dnsPolicy: ClusterFirstWithHostNet
+      # hostNetwork: true
+      # dnsPolicy: ClusterFirstWithHostNet
 
       volumes:
       - name: openhab-conf
@@ -54,8 +54,12 @@ spec:
 
       containers:
       - name: openhab
-        image: jgoodhouse/openhab:2.5.9-78406f6
-        imagePullPolicy: Always
+        image: openhab/openhab:2.5.9
+        # image: jgoodhouse/openhab:2.5.9-78406f6
+        # image: jgoodhouse/openhab:btracker-test
+        # imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
         securityContext:
           privileged: true # to allow bluetooth and zstick access, might be able to be scoped down some
         volumeMounts:

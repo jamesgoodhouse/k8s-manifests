@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bluetooth-detector
+  namespace: openhab
+  labels:
+    app: bluetooth-detector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluetooth-detector
+  template:
+    metadata:
+      labels:
+        app: bluetooth-detector
+    spec:
+      hostNetwork: true # to allow bluetooth access
+      dnsPolicy: ClusterFirstWithHostNet
+      volumes:
+      - name: config-yaml
+        configMap:
+          name: bluetooth-detector
+      containers:
+      - name: bt
+        image: jgoodhouse/bt-tracker
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true # to allow bluetooth access
+        volumeMounts:
+        - name: config-yaml
+          mountPath: /etc/bluetooth_tracker
+          readOnly: true

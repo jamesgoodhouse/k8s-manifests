@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-dashboard-internet
+  name: grafana-dashboard-bluetooth
   labels:
     grafana_dashboard: "1"
 data:
-  internet.json: |-
+  hvac.json: |-
     {
       "annotations": {
         "list": [
@@ -28,8 +28,8 @@ data:
       "panels": [
         {
           "aliasColors": {
-            "Download Rate": "blue",
-            "Upload Rate": "red"
+            "Bluetooth_JamesMobile_RSSI.distinct": "blue",
+            "James' Phone": "blue"
           },
           "bars": false,
           "dashLength": 10,
@@ -41,10 +41,10 @@ data:
             },
             "overrides": []
           },
-          "fill": 1,
+          "fill": 0,
           "fillGradient": 0,
           "gridPos": {
-            "h": 13,
+            "h": 17,
             "w": 24,
             "x": 0,
             "y": 0
@@ -60,24 +60,24 @@ data:
             "total": false,
             "values": false
           },
-          "lines": true,
+          "lines": false,
           "linewidth": 1,
           "nullPointMode": "null",
           "options": {
-            "alertThreshold": true
+            "alertThreshold": false
           },
           "percentage": false,
           "pluginVersion": "7.2.0",
-          "pointradius": 2,
-          "points": false,
+          "pointradius": 1,
+          "points": true,
           "renderer": "flot",
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
-          "steppedLine": false,
+          "steppedLine": true,
           "targets": [
             {
-              "alias": "Download Rate",
+              "alias": "James' Phone",
               "groupBy": [
                 {
                   "params": [
@@ -92,47 +92,10 @@ data:
                   "type": "fill"
                 }
               ],
-              "measurement": "Speedtest_ResultDown",
+              "measurement": "Bluetooth_JamesMobile_RSSI",
               "orderByTime": "ASC",
               "policy": "default",
               "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "value"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "distinct"
-                  }
-                ]
-              ],
-              "tags": []
-            },
-            {
-              "alias": "Upload Rate",
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "Speedtest_ResultUp",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "refId": "B",
               "resultFormat": "time_series",
               "select": [
                 [
@@ -155,13 +118,12 @@ data:
           "timeFrom": null,
           "timeRegions": [],
           "timeShift": null,
-          "title": "",
+          "title": "RSSI",
           "tooltip": {
             "shared": true,
             "sort": 0,
             "value_type": "individual"
           },
-          "transparent": true,
           "type": "graph",
           "xaxis": {
             "buckets": null,
@@ -173,11 +135,11 @@ data:
           "yaxes": [
             {
               "decimals": 0,
-              "format": "Mbits",
-              "label": "Rate",
+              "format": "dBm",
+              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
+              "max": "0",
+              "min": "-100",
               "show": true
             },
             {
@@ -186,7 +148,7 @@ data:
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
+              "show": false
             }
           ],
           "yaxis": {
@@ -202,12 +164,12 @@ data:
         "list": []
       },
       "time": {
-        "from": "now-7d",
+        "from": "now-6h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
-      "title": "Internet",
-      "uid": "M-bmFMWRk",
-      "version": 2
+      "title": "Bluetooth",
+      "uid": "_TFHLHRgz",
+      "version": 10
     }

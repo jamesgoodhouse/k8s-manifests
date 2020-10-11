@@ -43,14 +43,7 @@ spec:
             env:
             - name: CONFIGS_REPO_URL
               value: https://github.com/jamesgoodhouse/openhab-configs.git
-            - name: INFLUXDB_USER
-              valueFrom:
-                secretKeyRef:
-                  name: influxdb-auth
-                  key: influxdb-user
-            - name: INFLUXDB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: influxdb-auth
-                  key: influxdb-password
+            envFrom:
+            - secretRef:
+                name: influxdb-auth
           restartPolicy: Never

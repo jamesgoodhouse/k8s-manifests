@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: bluetooth-detector
+  namespace: openhab
+data:
+  config.yaml: |
+    devices:
+    - address: 00:CD:FE:0B:3B:A3
+      timeout: 5
+      lookup_rssi: true
+      scan_interval: 30
+    log_level: DEBUG
+    mqtt:
+      enabled: true
+      host: mosquitto.data
+      port: 1883
+      log_level: WARNING
+      topic_prefix: home/bluetooth
+    scheduler:
+      log_level: WARNING
