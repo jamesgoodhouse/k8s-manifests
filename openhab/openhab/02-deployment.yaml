@@ -54,10 +54,7 @@ spec:
 
       containers:
       - name: openhab
-        image: openhab/openhab:2.5.9
-        # image: jgoodhouse/openhab:2.5.9-78406f6
-        # image: jgoodhouse/openhab:btracker-test
-        # imagePullPolicy: Always
+        image: openhab/openhab:2.5.10
         ports:
         - containerPort: 8080
         securityContext:
