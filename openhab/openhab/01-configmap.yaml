@@ -98,7 +98,7 @@ data:
         binding: airquality,daikin,mqtt,network,systeminfo,zwave
         misc: ''
         persistence: influxdb
-        transformation: map
+        transformation: jsonpath,map
         ui: basic,habmin,paper,restdocs
       ephemeris:
         country: us
