@@ -1,0 +1,72 @@
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  chart: traefik
+  repo: https://helm.traefik.io/traefik
+  version: 9.12.3
+  targetNamespace: traefik
+  valuesContent: |-
+    additionalArguments:
+    - --certificatesresolvers.letsencrypt.acme.dnschallenge.delaybeforecheck=0
+    - --certificatesresolvers.letsencrypt.acme.dnschallenge.provider=namecheap
+    - --certificatesresolvers.letsencrypt.acme.dnschallenge.resolvers=156.154.132.200,156.154.133.200
+    - --certificatesresolvers.letsencrypt.acme.dnschallenge=true
+    - --certificatesresolvers.letsencrypt.acme.email=admin@goodhouse.io
+    - --certificatesresolvers.letsencrypt.acme.storage=/data/acme.json
+    - --entrypoints.web.http.redirections.entrypoint.scheme=https
+    - --entrypoints.web.http.redirections.entrypoint.to=:443
+    - --entrypoints.websecure.http.tls.certResolver=letsencrypt
+    - --log.level=DEBUG
+    - --serversTransport.insecureSkipVerify=true
+    envFrom:
+    - secretRef:
+        name: namecheap-auth
+    persistence:
+      enabled: true
+      storageClassName: local-path
+    ports:
+      traefik:
+        port: 9000
+        expose: false
+        exposedPort: 9000
+        protocol: TCP
+      web:
+        port: 8000
+        expose: true
+        exposedPort: 80
+        protocol: TCP
+      websecure:
+        port: 8443
+        expose: true
+        exposedPort: 443
+        protocol: TCP
+        tls:
+          enabled: false
+          options: ""
+          certResolver: ""
+          domains: []
+      webalt:
+        port: 8080
+        expose: true
+        exposedPort: 8080
+        protocol: TCP
+        tls:
+          enabled: false
+      unifi-discovery:
+        port: 10001
+        expose: true
+        exposedPort: 10001
+        protocol: UDP
+        tls:
+          enabled: false
+      unifi-stun:
+        port: 3478
+        expose: true
+        exposedPort: 3478
+        protocol: UDP
+        tls:
+          enabled: false
