@@ -34,6 +34,20 @@ spec:
         expose: false
         exposedPort: 9000
         protocol: TCP
+      unifi-discovery:
+        port: 10001
+        expose: true
+        exposedPort: 10001
+        protocol: UDP
+        tls:
+          enabled: false
+      unifi-stun:
+        port: 3478
+        expose: true
+        exposedPort: 3478
+        protocol: UDP
+        tls:
+          enabled: false
       web:
         port: 8000
         expose: true
@@ -54,19 +68,5 @@ spec:
         expose: true
         exposedPort: 8080
         protocol: TCP
-        tls:
-          enabled: false
-      unifi-discovery:
-        port: 10001
-        expose: true
-        exposedPort: 10001
-        protocol: UDP
-        tls:
-          enabled: false
-      unifi-stun:
-        port: 3478
-        expose: true
-        exposedPort: 3478
-        protocol: UDP
         tls:
           enabled: false
