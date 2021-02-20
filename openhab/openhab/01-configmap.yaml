@@ -6,62 +6,11 @@ metadata:
   namespace: openhab
 data:
   config.yaml: |
-    definitions:
-      daikin:
-        ac_unit:
-          items: &daikin_ac_unit_items
-          - name: IndoorTemperature
-            label: Indoor Temperature
-            type: 'Number:Temperature'
-            groups: HVAC,Temperatures,Room_Bedroom_Main
-            channel: indoortemp
-          - name: OutdoorTemperature
-            label: Outdoor Temperature
-            type: 'Number:Temperature'
-            groups: HVAC,Temperatures,Room_Bedroom_Main
-            channel: outdoortemp
-          - name: SetPoint
-            label: Set Point
-            type: 'Number:Temperature'
-            groups: HVAC,Temperatures,Room_Bedroom_Main
-            channel: settemp
-          - name: Fan
-            label: Fan
-            type: String
-            groups: HVAC,Room_Bedroom_Main
-            channel: fanspeed
-          - name: FanSwing
-            label: Fan Swing
-            type: String
-            groups: HVAC,Room_Bedroom_Main
-            channel: fandir
-          - name: Mode
-            label: Mode
-            type: String
-            groups: HVAC,Room_Bedroom_Main
-            channel: mode
-          - name: Power
-            label: Power
-            type: Switch
-            groups: HVAC,Room_Bedroom_Main
-            channel: power
-
-    groups:
-      house:
-        name: House
-      floor_ground:
-        name: Floor_Ground
-      floor_first:
-        name: Floor_First
-      floor_second:
-        name: Floor_Second
-      room_bedroom_main:
-        name: Room_Bedroom_main
     settings:
       addons:
         action: telegram
         package: minimal
-        binding: airquality,daikin,konnected,mqtt,network,systeminfo,unifi,zwave
+        binding: airquality,daikin,konnected,mqtt,unifi,zwave
         misc: ''
         persistence: influxdb
         transformation: jsonpath,map
@@ -84,21 +33,22 @@ data:
       airquality:
         station_id: 86
       daikin:
-        great_room:
-          host: great-room.hvac.home.goodhouse.io
-          items: *daikin_ac_unit_items
-          label: HVAC
-          location: Great Room
-          thing_id: great_room
+        living_room:
+          thing_id: living_room
           type_id: ac_unit
-        main_bedroom:
-          host: main-bedroom.hvac.home.goodhouse.io
-          items: *daikin_ac_unit_items
+          name: LivingRoom
+          host: great-room.hvac.home.goodhouse.io
           label: HVAC
-          location: Main Bedroom
+          location: Living Room
+        main_bedroom:
           thing_id: main_bedroom
           type_id: ac_unit
+          name: MainBedroom
+          host: main-bedroom.hvac.home.goodhouse.io
+          label: HVAC
+          location: Main Bedroom
       unifi:
+        refresh_rate: 10
         wireless_clients:
         - id: phone_james
           name: James' Phone
@@ -109,14 +59,14 @@ data:
           port: /dev/ttyUSB0
         sensors:
           front_door:
+            thing_id: front_door_sensor
             label: Door Sensor
             location: Entryway
             node_id: 2
-            thing_id: front_door_sensor
             type_id: eco_dwzwave25_00_000
           garage_door:
+            thing_id: garage_tilt_sensor
             label: Tilt Sensor
             location: Garage
             node_id: 3
-            thing_id: garage_tilt_sensor
             type_id: eco_tiltzwave25_00_000

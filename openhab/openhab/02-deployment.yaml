@@ -21,15 +21,9 @@ spec:
       # dnsPolicy: ClusterFirstWithHostNet
 
       volumes:
-      - name: openhab-conf
+      - name: openhab
         persistentVolumeClaim:
-          claimName: openhab-conf-pvc
-      - name: openhab-userdata
-        persistentVolumeClaim:
-          claimName: openhab-userdata-pvc
-      - name: openhab-conf-repo
-        persistentVolumeClaim:
-          claimName: openhab-conf-repo-pvc
+          claimName: openhab
       - name: zstick
         hostPath:
           path: /dev/ttyUSB0
@@ -48,8 +42,9 @@ spec:
           done
           echo 'configs found; starting'
         volumeMounts:
-        - name: openhab-conf
+        - name: openhab
           mountPath: /final_configs
+          subPath: conf
           readOnly: true
 
       containers:
@@ -63,7 +58,9 @@ spec:
         volumeMounts:
         - name: zstick
           mountPath: /dev/ttyUSB0
-        - name: openhab-conf
+        - name: openhab
           mountPath: /openhab/conf
-        - name: openhab-userdata
+          subPath: conf
+        - name: openhab
           mountPath: /openhab/userdata
+          subPath: userdata
