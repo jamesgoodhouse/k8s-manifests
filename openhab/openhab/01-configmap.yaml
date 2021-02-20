@@ -57,24 +57,53 @@ data:
         name: Floor_Second
       room_bedroom_main:
         name: Room_Bedroom_main
+    settings:
+      addons:
+        action: telegram
+        package: minimal
+        binding: airquality,daikin,konnected,mqtt,network,systeminfo,unifi,zwave
+        misc: ''
+        persistence: influxdb
+        transformation: jsonpath,map
+        ui: basic
+      ephemeris:
+        country: us
+        region: or
+        dayset:
+          trash: Friday
+      persistence:
+        influxdb:
+          db: openhab
+          url: http://influxdb.data:8086
+      i18n:
+        language: en
+        region: US
+        timezone: US/Pacific
+        measurement_system: US
     things:
       airquality:
         station_id: 86
       daikin:
         great_room:
-          host: great-room.hvac.home
+          host: great-room.hvac.home.goodhouse.io
           items: *daikin_ac_unit_items
           label: HVAC
           location: Great Room
           thing_id: great_room
           type_id: ac_unit
         main_bedroom:
-          host: main-bedroom.hvac.home
+          host: main-bedroom.hvac.home.goodhouse.io
           items: *daikin_ac_unit_items
           label: HVAC
           location: Main Bedroom
           thing_id: main_bedroom
           type_id: ac_unit
+      unifi:
+        wireless_clients:
+        - id: phone_james
+          name: James' Phone
+          consider_home: 180
+          site: default
       zwave:
         controller:
           port: /dev/ttyUSB0
@@ -91,26 +120,3 @@ data:
             node_id: 3
             thing_id: garage_tilt_sensor
             type_id: eco_tiltzwave25_00_000
-    settings:
-      addons:
-        action: telegram
-        package: minimal
-        binding: airquality,daikin,mqtt,network,systeminfo,zwave
-        misc: ''
-        persistence: influxdb
-        transformation: jsonpath,map
-        ui: basic,habmin,paper,restdocs
-      ephemeris:
-        country: us
-        region: or
-        dayset:
-          trash: Friday
-      persistence:
-        influxdb:
-          db: openhab
-          url: http://influxdb.data:8086
-      i18n:
-        language: en
-        region: US
-        timezone: US/Pacific
-        measurement_system: US
