@@ -8,13 +8,27 @@ data:
   config.yaml: |
     settings:
       addons:
-        action: telegram
         package: minimal
-        binding: airquality,daikin,konnected,mqtt,unifi,zwave
-        misc: ''
-        persistence: influxdb
-        transformation: jsonpath,map
-        ui: basic
+        binding:
+        - airquality
+        - astro
+        - bluetooth
+        - daikin
+        - konnected
+        - mqtt
+        - network
+        - telegram
+        - unifi
+        - zigbee
+        - zwave
+        misc: []
+        persistence:
+        - influxdb
+        transformation:
+        - jsonpath
+        - map
+        ui:
+        - basic
       ephemeris:
         country: us
         region: or
@@ -32,20 +46,21 @@ data:
     things:
       airquality:
         station_id: 86
+      bluetooth:
+        bridge:
+          background_discovery: "false"
       daikin:
         living_room:
           thing_id: living_room
           type_id: ac_unit
           name: LivingRoom
           host: great-room.hvac.home.goodhouse.io
-          label: HVAC
           location: Living Room
         main_bedroom:
           thing_id: main_bedroom
           type_id: ac_unit
           name: MainBedroom
           host: main-bedroom.hvac.home.goodhouse.io
-          label: HVAC
           location: Main Bedroom
       unifi:
         refresh_rate: 10
@@ -54,19 +69,30 @@ data:
           name: James' Phone
           consider_home: 180
           site: default
+      zigbee:
+        coordinator:
+          baud_rate: 57600
+          child_timeout: 86400
+          concentrator: 1
+          flow_control: 2 # software (XOn/XOff)
+          mesh_update_period: 86400
+          port: /dev/ttyUSB1
       zwave:
         controller:
           port: /dev/ttyUSB0
-        sensors:
-          front_door:
-            thing_id: front_door_sensor
-            label: Door Sensor
-            location: Entryway
-            node_id: 2
-            type_id: eco_dwzwave25_00_000
-          garage_door:
-            thing_id: garage_tilt_sensor
+        devices:
+          plugin_dimmer_living_room:
+            thing_id: plugin_dimmer_living_room
+            label: Plug-in Dimmer
+            location: Living Room
+            type_id: honeywell_zw3104_00_000
+            parameters:
+            - node_id: 4
+            - config_3_1: 2
+          tilt_sensor_garage_door:
+            thing_id: tilt_sensor_garage_door
             label: Tilt Sensor
             location: Garage
-            node_id: 3
             type_id: eco_tiltzwave25_00_000
+            parameters:
+            - node_id: 3

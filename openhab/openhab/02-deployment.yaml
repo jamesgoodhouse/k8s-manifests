@@ -24,9 +24,16 @@ spec:
       - name: openhab
         persistentVolumeClaim:
           claimName: openhab
-      - name: zstick
+      - name: zstick-zwave
         hostPath:
           path: /dev/ttyUSB0
+      - name: zstick-zigbee
+        hostPath:
+          path: /dev/ttyUSB1
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/America/Los_Angeles
+          type: File
 
       initContainers:
       - name: init-openhab
@@ -55,12 +62,24 @@ spec:
         - containerPort: 8080
         securityContext:
           privileged: true # to allow bluetooth and zstick access, might be able to be scoped down some
+        env:
+        - name: EXTRA_JAVA_OPTS
+          value: "-Duser.timezone=America/Los_Angeles -Dgnu.io.rxtx.SerialPorts=/dev/ttyUSB0:/dev/ttyUSB1"
+        - name: TZ
+          value: America/Los_Angeles
+        - name: CRYPTO_POLICY
+          value: unlimited
         volumeMounts:
-        - name: zstick
+        - name: zstick-zwave
           mountPath: /dev/ttyUSB0
+        - name: zstick-zigbee
+          mountPath: /dev/ttyUSB1
         - name: openhab
           mountPath: /openhab/conf
           subPath: conf
         - name: openhab
           mountPath: /openhab/userdata
           subPath: userdata
+        - name: tz-config
+          mountPath: /etc/localtime
+          readOnly: true
