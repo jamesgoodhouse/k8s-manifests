@@ -1,0 +1,36 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mosquitto-secure
+  namespace: data
+spec:
+  entryPoints:
+  - mqtt-secure
+  routes:
+  - kind: Rule
+    match: HostSNI(`*`)
+    services:
+    - kind: Service
+      name: mosquitto
+      namespace: data
+      port: 1883
+  tls:
+    certResolver: letsencrypt
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRouteTCP
+metadata:
+  name: mosquitto
+  namespace: data
+spec:
+  entryPoints:
+  - mqtt
+  routes:
+  - kind: Rule
+    match: HostSNI(`*`)
+    services:
+    - kind: Service
+      name: mosquitto
+      namespace: data
+      port: 1883
