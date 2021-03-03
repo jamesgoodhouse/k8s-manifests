@@ -29,6 +29,16 @@ spec:
       enabled: true
       storageClassName: local-path
     ports:
+      mqtt:
+        port: 1883
+        expose: true
+        exposedPort: 1883
+        protocol: TCP
+      mqtt-secure:
+        port: 8883
+        expose: true
+        exposedPort: 8883
+        protocol: TCP
       traefik:
         port: 9000
         expose: false
