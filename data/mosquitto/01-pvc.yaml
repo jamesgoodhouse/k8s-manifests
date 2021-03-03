@@ -2,20 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mosquitto-data-pvc
-  namespace: data
-spec:
-  storageClassName: local-path
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100M
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mosquitto-logs-pvc
+  name: mosquitto
   namespace: data
 spec:
   storageClassName: local-path

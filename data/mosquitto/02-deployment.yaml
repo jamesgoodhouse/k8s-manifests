@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mosquitto-deployment
+  name: mosquitto
   namespace: data
   labels:
     app: mosquitto
@@ -16,27 +16,30 @@ spec:
       labels:
         app: mosquitto
     spec:
+      securityContext:
+        runAsUser: 1883
+        runAsGroup: 1883
       volumes:
-      - name: mosquitto-data
+      - name: mosquitto
         persistentVolumeClaim:
-          claimName: mosquitto-data-pvc
-      - name: mosquitto-logs
-        persistentVolumeClaim:
-          claimName: mosquitto-logs-pvc
+          claimName: mosquitto
       - name: conf
         configMap:
           name: mosquitto-conf
+      - name: passwd
+        secret:
+          secretName: mosquitto-passwd
 
       containers:
       - name: mosquitto
-        image: eclipse-mosquitto:1.6.12
+        image: eclipse-mosquitto:2.0
         ports:
         - containerPort: 1883
-        - containerPort: 8883
         volumeMounts:
-        - name: mosquitto-data
+        - name: mosquitto
           mountPath: /mosquitto/data
-        - name: mosquitto-logs
-          mountPath: /mosquitto/log
+          subPath: data
         - name: conf
           mountPath: /mosquitto/config
+        - name: passwd
+          mountPath: /etc/mosquitto

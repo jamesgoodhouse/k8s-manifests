@@ -5,7 +5,23 @@ metadata:
   name: mosquitto-conf
   namespace: data
 data:
-  mosquitto.conf:
+  mosquitto.conf: |
+    acl_file /mosquitto/config/acl
+    allow_anonymous false
+    listener 1883
+    log_type debug
+    password_file /etc/mosquitto/passwd
     persistence true
     persistence_location /mosquitto/data/
-    log_dest file /mosquitto/log/mosquitto.log
+    user mosquitto
+  acl: |
+    topic read $SYS/#
+
+    user konnected
+    topic konnected/#
+
+    user openhab
+    topic read sensor_reporter/#
+
+    user sensor_reporter
+    topic sensor_reporter/#
